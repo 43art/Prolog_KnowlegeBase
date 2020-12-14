@@ -17,3 +17,17 @@ neighbour(C1, C2):-
     C2 = child(P2, H2, _).
 
 neighbour(P1, P2):-neighbour(P2, P1).
+
+write_list([]):-!.
+write_list([H|T]):-write(H), nl, write_list(T).
+
+answer:-
+    length(Ans, 3),
+    member(child(petya, _, _), Ans),
+    member(child(lena, _, _), Ans),
+    member(child(tanya, _, cat), Ans),
+    member(child(_, _, dog), Ans),
+    member(child(_, _, humster), Ans),
+    neighbour(child(petya, Entrance, _), child(_, Entrance, humster)),
+    not(member(child(petya, _, cat), Ans)),
+    write_list(Ans),!.
